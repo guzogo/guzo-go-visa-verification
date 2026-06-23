@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>GUZO GO Visa Verification</title>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+<style>
+
+body{
+margin:0;
+padding:20px;
+font-family:Arial,sans-serif;
+background:#f4f6f9;
+}
+
+.header{
+background:#003366;
+color:white;
+padding:20px;
+text-align:center;
+font-size:24px;
+font-weight:bold;
+border-radius:10px;
+}
+
+.card{
+max-width:450px;
+margin:20px auto;
+background:white;
+padding:20px;
+border-radius:15px;
+box-shadow:0 0 15px rgba(0,0,0,.1);
+}
+
+input{
+width:100%;
+padding:12px;
+box-sizing:border-box;
+}
+
+button{
+width:100%;
+padding:12px;
+margin-top:10px;
+background:#003366;
+color:white;
+border:none;
+border-radius:5px;
+}
+
+#result{
+margin-top:20px;
+text-align:center;
+}
+
+#qrcode{
+margin-top:15px;
+display:flex;
+justify-content:center;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="header">
+GUZO GO Visa Verification
+</div>
+
+<div class="card">
+
+<h2>Visa Verification</h2>
+
+<input
+type="text"
+id="visaId"
+placeholder="Enter Visa ID">
+
+<button onclick="verifyVisa()">
+Verify
+</button>
+
+<div id="result"></div>
+
+<div id="qrcode"></div>
+
+</div>
+
+<script>
+
+const applicants = [
+
+{
+id:"VG251001",
+name:"Adonay Bamlaku",
+country:"Canada 🇨🇦",
+status:"Approved"
+},
+
+{
+id:"VG251002",
+name:"Sara Ahmed",
+country:"Saudi Arabia 🇸🇦",
+status:"Processing"
+},
+
+{
+id:"VG251003",
+name:"Mohammed Ali",
+country:"Kuwait 🇰🇼",
+status:"Approved"
+},
+
+{
+id:"VG251004",
+name:"John Smith",
+country:"United Arab Emirates 🇦🇪",
+status:"Rejected"
+}
+
+];
+
+function verifyVisa(){
+
+let id =
+document.getElementById("visaId").value.trim();
+
+let user =
+applicants.find(a => a.id === id);
+
+if(user){
+
+document.getElementById("result").innerHTML = `
+
+<h3>${user.name}</h3>
+
+<p><b>Visa ID:</b> ${user.id}</p>
+
+<p><b>Country:</b> ${user.country}</p>
+
+<p><b>Status:</b> ${user.status}</p>
+
+`;
+
+document.getElementById("qrcode").innerHTML="";
+
+new QRCode(
+document.getElementById("qrcode"),
+{
+text:user.id,
+width:150,
+height:150
+}
+);
+
+}else{
+
+document.getElementById("result").innerHTML =
+"<p style='color:red'>❌ Visa ID Not Found</p>";
+
+document.getElementById("qrcode").innerHTML="";
+
+}
+
+}
+
+</script>
+
+</body>
+  </html>
