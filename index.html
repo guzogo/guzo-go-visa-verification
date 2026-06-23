@@ -3,43 +3,50 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>GUZO GO Visa Verification</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
 <style>
 
-body{
+*{
 margin:0;
-padding:20px;
+padding:0;
+box-sizing:border-box;
 font-family:Arial,sans-serif;
-background:#f4f6f9;
+}
+
+body{
+background:#eef2f7;
+padding:20px;
 }
 
 .header{
 background:#003366;
 color:white;
-padding:20px;
 text-align:center;
+padding:18px;
 font-size:24px;
 font-weight:bold;
-border-radius:10px;
+border-radius:12px;
+margin-bottom:20px;
 }
 
-.card{
-max-width:450px;
-margin:20px auto;
+.search-box{
+max-width:500px;
+margin:auto;
 background:white;
 padding:20px;
 border-radius:15px;
-box-shadow:0 0 15px rgba(0,0,0,.1);
+box-shadow:0 5px 15px rgba(0,0,0,.1);
 }
 
 input{
 width:100%;
 padding:12px;
-box-sizing:border-box;
+border:1px solid #ccc;
+border-radius:8px;
+margin-top:10px;
 }
 
 button{
@@ -49,22 +56,60 @@ margin-top:10px;
 background:#003366;
 color:white;
 border:none;
-border-radius:5px;
+border-radius:8px;
+font-size:16px;
 }
 
-#result{
-margin-top:20px;
+.result-card{
+max-width:500px;
+margin:20px auto;
+background:white;
+border-radius:15px;
+overflow:hidden;
+box-shadow:0 5px 15px rgba(0,0,0,.1);
+}
+
+.card-top{
+background:#003366;
+color:white;
 text-align:center;
+padding:15px;
+}
+
+.photo{
+width:130px;
+height:130px;
+border-radius:50%;
+border:4px solid white;
+margin-top:10px;
+object-fit:cover;
+}
+
+.card-body{
+padding:20px;
+}
+
+.row{
+padding:8px 0;
+border-bottom:1px solid #eee;
+}
+
+.label{
+font-weight:bold;
+}
+
+.status{
+color:green;
+font-weight:bold;
 }
 
 #qrcode{
-margin-top:15px;
 display:flex;
 justify-content:center;
+padding:20px;
 }
 
 </style>
-
 </head>
 
 <body>
@@ -73,9 +118,9 @@ justify-content:center;
 GUZO GO Visa Verification
 </div>
 
-<div class="card">
+<div class="search-box">
 
-<h2>Visa Verification</h2>
+<h3>Visa Verification</h3>
 
 <input
 type="text"
@@ -83,14 +128,12 @@ id="visaId"
 placeholder="Enter Visa ID">
 
 <button onclick="verifyVisa()">
-Verify
+Verify Visa
 </button>
 
-<div id="result"></div>
-
-<div id="qrcode"></div>
-
 </div>
+
+<div id="result"></div>
 
 <script>
 
@@ -100,77 +143,99 @@ const applicants = [
 id:"VG251001",
 name:"Adonay Bamlaku",
 country:"Canada 🇨🇦",
-status:"Approved"
+type:"Work Visa",
+status:"Approved",
+date:"2026-06-23",
+photo:"https://via.placeholder.com/150"
 },
 
 {
 id:"VG251002",
 name:"Sara Ahmed",
 country:"Saudi Arabia 🇸🇦",
-status:"Processing"
-},
-
-{
-id:"VG251003",
-name:"Mohammed Ali",
-country:"Kuwait 🇰🇼",
-status:"Approved"
-},
-
-{
-id:"VG251004",
-name:"John Smith",
-country:"United Arab Emirates 🇦🇪",
-status:"Rejected"
+type:"Work Visa",
+status:"Processing",
+date:"2026-06-23",
+photo:"https://via.placeholder.com/150"
 }
 
 ];
 
 function verifyVisa(){
 
-let id =
-document.getElementById("visaId").value.trim();
+let id=document.getElementById("visaId").value.trim();
 
-let user =
-applicants.find(a => a.id === id);
+let user=applicants.find(a=>a.id===id);
 
-if(user){
+if(!user){
 
-document.getElementById("result").innerHTML = `
+document.getElementById("result").innerHTML=
+"<h3 style='text-align:center;color:red;margin-top:20px'>Visa ID Not Found</h3>";
 
-<h3>${user.name}</h3>
+return;
 
-<p><b>Visa ID:</b> ${user.id}</p>
+}
 
-<p><b>Country:</b> ${user.country}</p>
+document.getElementById("result").innerHTML=`
 
-<p><b>Status:</b> ${user.status}</p>
+<div class="result-card">
 
+<div class="card-top">
+
+<h2>Verified Applicant</h2>
+
+<img class="photo" src="${user.photo}">
+
+</div>
+
+<div class="card-body">
+
+<div class="row">
+<span class="label">Full Name:</span>
+${user.name}
+</div>
+
+<div class="row">
+<span class="label">Visa ID:</span>
+${user.id}
+</div>
+
+<div class="row">
+<span class="label">Country:</span>
+${user.country}
+</div>
+
+<div class="row">
+<span class="label">Application Type:</span>
+${user.type}
+</div>
+
+<div class="row">
+<span class="label">Verification Date:</span>
+${user.date}
+</div>
+
+<div class="row">
+<span class="label">Status:</span>
+<span class="status">${user.status}</span>
+</div>
+
+<div id="qrcode"></div>
+
+</div>
+
+</div>
 `;
 
-document.getElementById("qrcode").innerHTML="";
-
-new QRCode(
-document.getElementById("qrcode"),
-{
+new QRCode(document.getElementById("qrcode"),{
 text:user.id,
-width:150,
-height:150
-}
-);
-
-}else{
-
-document.getElementById("result").innerHTML =
-"<p style='color:red'>❌ Visa ID Not Found</p>";
-
-document.getElementById("qrcode").innerHTML="";
-
-}
+width:160,
+height:160
+});
 
 }
 
 </script>
 
 </body>
-  </html>
+</html>
