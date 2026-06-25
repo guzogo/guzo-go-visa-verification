@@ -238,3 +238,6 @@ updateStats();
 displayApplicants();
 
       }
+window.generateApplicant = generateApplicant;
+window.searchApplicant = searchApplicant;
+window.deleteApplicant = deleteApplicant;
