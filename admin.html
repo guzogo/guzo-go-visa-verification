@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GUZO GO Admin Dashboard</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="header">
+GUZO GO Admin Dashboard
+</div>
+
+<div class="container">
+
+<div class="card">
+
+<h2>Add Applicant</h2>
+
+<input id="name" placeholder="Full Name">
+
+<input id="passport" placeholder="Passport Number">
+
+<input id="dob" placeholder="Date of Birth (Example: 01 Jan 2000)">
+
+<input id="issueDate" value="Auto Generated" readonly>
+
+<input id="expiryDate" value="Auto Generated" readonly>
+
+<select id="country">
+<option>Canada 🇨🇦</option>
+<option>Saudi Arabia 🇸🇦</option>
+<option>Kuwait 🇰🇼</option>
+<option>United Arab Emirates 🇦🇪</option>
+</select>
+
+<select id="type">
+<option>Work Visa</option>
+<option>Visit Visa</option>
+<option>Student Visa</option>
+<option>Temporary Resident Permit</option>
+</select>
+
+<select id="status">
+<option>Approved</option>
+<option>Processing</option>
+<option>Rejected</option>
+</select>
+
+<input id="photo" placeholder="Photo URL">
+
+<button onclick="generateApplicant()">
+Generate Applicant
+</button>
+
+<hr>
+
+<h2>Dashboard Statistics</h2>
+
+<div id="stats"></div>
+
+<hr>
+
+<h2>Search Applicant</h2>
+
+<input
+id="searchInput"
+placeholder="Search Applicant ID">
+
+<button onclick="searchApplicant()">
+Search Applicant
+</button>
+
+<div id="searchResult"></div>
+
+<div id="photoPreview"></div>
+
+<div id="applicantList"></div>
+
+</div>
+
+</div>
+
+<script type="module" src="app.js"></script>
+
+</body>
+  </html>
