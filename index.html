@@ -23,66 +23,80 @@ padding:20px;
 
 .header{
 background:#003366;
-color:white;
+color:#fff;
 text-align:center;
 padding:18px;
 font-size:24px;
 font-weight:bold;
 border-radius:12px;
 margin-bottom:20px;
+box-shadow:0 5px 15px rgba(0,0,0,.15);
 }
 
 .search-box{
-max-width:500px;
+max-width:550px;
 margin:auto;
-background:white;
+background:#fff;
 padding:20px;
 border-radius:15px;
-box-shadow:0 5px 15px rgba(0,0,0,.1);
+box-shadow:0 5px 15px rgba(0,0,0,.12);
+}
+
+.search-box h3{
+margin-bottom:15px;
+color:#003366;
+text-align:center;
 }
 
 input{
 width:100%;
-padding:12px;
+padding:13px;
+margin-top:10px;
 border:1px solid #ccc;
 border-radius:8px;
-margin-top:10px;
+font-size:15px;
 }
 
 button{
 width:100%;
-padding:12px;
-margin-top:10px;
+padding:13px;
+margin-top:12px;
 background:#003366;
 color:white;
 border:none;
 border-radius:8px;
 font-size:16px;
+font-weight:bold;
+cursor:pointer;
+}
+
+button:hover{
+background:#004a99;
 }
 
 .result-card{
-max-width:500px;
-margin:20px auto;
+max-width:550px;
+margin:25px auto;
 background:white;
 border-radius:15px;
 overflow:hidden;
-box-shadow:0 5px 15px rgba(0,0,0,.1);
+box-shadow:0 5px 20px rgba(0,0,0,.12);
 }
 
 .card-top{
 background:#003366;
 color:white;
 text-align:center;
-padding:15px;
+padding:20px;
 }
 
 .photo{
-width:130px;
-height:130px;
+width:140px;
+height:140px;
 border-radius:50%;
-border:4px solid white;
-margin-top:10px;
+border:5px solid white;
 object-fit:cover;
+margin-top:10px;
 }
 
 .card-body{
@@ -90,16 +104,29 @@ padding:20px;
 }
 
 .row{
-padding:8px 0;
+display:flex;
+justify-content:space-between;
+padding:10px 0;
 border-bottom:1px solid #eee;
 }
 
 .label{
 font-weight:bold;
+color:#003366;
 }
 
-.status{
+.status-approved{
 color:green;
+font-weight:bold;
+}
+
+.status-processing{
+color:orange;
+font-weight:bold;
+}
+
+.status-rejected{
+color:red;
 font-weight:bold;
 }
 
@@ -109,7 +136,15 @@ justify-content:center;
 padding:20px;
 }
 
+.footer{
+text-align:center;
+margin-top:25px;
+color:#777;
+font-size:14px;
+}
+
 </style>
+
 </head>
 
 <body>
@@ -120,122 +155,17 @@ GUZO GO Visa Verification
 
 <div class="search-box">
 
-<h3>Visa Verification</h3>
+<h3>Visa Verification System</h3>
 
 <input
 type="text"
 id="visaId"
 placeholder="Enter Visa ID">
 
-<button onclick="verifyVisa()">
+<button id="verifyBtn">
 Verify Visa
 </button>
 
 </div>
 
 <div id="result"></div>
-
-<script>
-
-const applicants = [
-
-{
-id:"VG251001",
-name:"Adonay Bamlaku",
-country:"Canada 🇨🇦",
-type:"Work Visa",
-status:"Approved",
-date:"2026-06-23",
-photo:"https://via.placeholder.com/150"
-},
-
-{
-id:"VG251002",
-name:"Sara Ahmed",
-country:"Saudi Arabia 🇸🇦",
-type:"Work Visa",
-status:"Processing",
-date:"2026-06-23",
-photo:"https://via.placeholder.com/150"
-}
-
-];
-
-function verifyVisa(){
-
-let id=document.getElementById("visaId").value.trim();
-
-let user=applicants.find(a=>a.id===id);
-
-if(!user){
-
-document.getElementById("result").innerHTML=
-"<h3 style='text-align:center;color:red;margin-top:20px'>Visa ID Not Found</h3>";
-
-return;
-
-}
-
-document.getElementById("result").innerHTML=`
-
-<div class="result-card">
-
-<div class="card-top">
-
-<h2>Verified Applicant</h2>
-
-<img class="photo" src="${user.photo}">
-
-</div>
-
-<div class="card-body">
-
-<div class="row">
-<span class="label">Full Name:</span>
-${user.name}
-</div>
-
-<div class="row">
-<span class="label">Visa ID:</span>
-${user.id}
-</div>
-
-<div class="row">
-<span class="label">Country:</span>
-${user.country}
-</div>
-
-<div class="row">
-<span class="label">Application Type:</span>
-${user.type}
-</div>
-
-<div class="row">
-<span class="label">Verification Date:</span>
-${user.date}
-</div>
-
-<div class="row">
-<span class="label">Status:</span>
-<span class="status">${user.status}</span>
-</div>
-
-<div id="qrcode"></div>
-
-</div>
-
-</div>
-`;
-
-new QRCode(document.getElementById("qrcode"),{
-text:user.id,
-width:160,
-height:160
-});
-
-}
-
-</script>
-
-</body>
-</html>
