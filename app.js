@@ -1,5 +1,12 @@
-let applicants = JSON.parse(localStorage.getItem("applicants")) || [];
-
+import { db } from "./firebase.js";
+import {
+collection,
+addDoc,
+getDocs,
+deleteDoc,
+doc
+} from "https://www.gstatic.com/firebasejs/12.15.0/firebase-firestore.js";
+let applicants = [];
 updateStats();
 displayApplicants();
 
@@ -7,7 +14,7 @@ function generateId() {
     return "VG" + Math.floor(100000 + Math.random() * 900000);
 }
 
-function generateApplicant() {
+async function generateApplicant() {
 
     let today = new Date();
 
@@ -44,7 +51,7 @@ function generateApplicant() {
 
     };
 
-    applicants.push(applicant);
+    await addDoc(collection(db, "applicants"), applicant);
 
     localStorage.setItem(
         "applicants",
@@ -229,10 +236,7 @@ return;
 applicants =
 applicants.filter(a => a.id !== id);
 
-localStorage.setItem(
-"applicants",
-JSON.stringify(applicants)
-);
+
 
 updateStats();
 displayApplicants();
