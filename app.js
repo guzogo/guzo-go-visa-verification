@@ -53,10 +53,7 @@ async function generateApplicant() {
 
     await addDoc(collection(db, "applicants"), applicant);
 
-    localStorage.setItem(
-        "applicants",
-        JSON.stringify(applicants)
-    );
+    
 
     document.getElementById("photoPreview").innerHTML = `
     <div style="text-align:center;margin-top:20px;">
@@ -72,8 +69,7 @@ async function generateApplicant() {
     </div>
     `;
 
-    updateStats();
-    displayApplicants();
+    await loadApplicants();
 
     alert(
 `Applicant Created
@@ -227,21 +223,36 @@ document.getElementById("searchResult").innerHTML =
 
 }
 
-function deleteApplicant(id){
+
+async function deleteApplicant(id){
 
 if(!confirm("Delete this applicant?")){
 return;
 }
 
-applicants =
-applicants.filter(a => a.id !== id);
+alert("Delete will be completed in the next step.");
 
+await loadApplicants();
 
+}
+async function loadApplicants() {
 
-updateStats();
-displayApplicants();
+    const snapshot = await getDocs(collection(db, "applicants"));
 
-      }
+    applicants = [];
+
+    snapshot.forEach((doc) => {
+        applicants.push({
+            firestoreId: doc.id,
+            ...doc.data()
+        });
+    });
+
+    updateStats();
+    displayApplicants();
+}
+
+loadApplicants();
 window.generateApplicant = generateApplicant;
 window.searchApplicant = searchApplicant;
 window.deleteApplicant = deleteApplicant;
