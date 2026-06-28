@@ -266,6 +266,103 @@ document.getElementById("qrcode").innerHTML="";
 return;
 
 }
+  document.getElementById("result").innerHTML = `
+
+<div class="visa-card">
+
+<div class="card-header">
+
+<div class="logo">
+GUZO GO
+</div>
+
+<div class="verify">
+✔ VERIFIED VISA
+</div>
+
+</div>
+
+<div class="card-body">
+
+<div class="left">
+
+<img
+src="${applicant.photo || 'https://via.placeholder.com/180x220'}"
+class="photo">
+
+<div id="qrcode"></div>
+
+</div>
+
+<div class="right">
+
+<div class="name">
+${applicant.name}
+</div>
+
+<div class="visa-id">
+${applicant.id}
+</div>
+
+<div class="info-row">
+<b>Passport</b>
+<span>${applicant.passport}</span>
+</div>
+
+<div class="info-row">
+<b>Date of Birth</b>
+<span>${applicant.dob}</span>
+</div>
+
+<div class="info-row">
+<b>Country</b>
+<span>${applicant.country}</span>
+</div>
+
+<div class="info-row">
+<b>Visa Type</b>
+<span>${applicant.type}</span>
+</div>
+
+<div class="info-row">
+<b>Status</b>
+<span class="status-approved">
+${applicant.status}
+</span>
+</div>
+
+<div class="info-row">
+<b>Issue Date</b>
+<span>${applicant.issueDate}</span>
+</div>
+
+<div class="info-row">
+<b>Expiry Date</b>
+<span>${applicant.expiryDate}</span>
+</div>
+
+</div>
+
+</div>
+
+<div class="footer">
+GUZO GO • Official Visa Verification System
+</div>
+
+</div>
+
+`;
+  document.getElementById("qrcode").innerHTML = "";
+
+new QRCode(document.getElementById("qrcode"),{
+    text: applicant.id,
+    width:150,
+    height:150
+});
+
+}
+
+window.verifyVisa = verifyVisa;
 document.getElementById("result").innerHTML = `
 
 <div class="visa-card">
