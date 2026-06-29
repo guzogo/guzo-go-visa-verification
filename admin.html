@@ -1,89 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GUZO GO Admin Dashboard</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GUZO GO Admin Dashboard</title>
+
+  <link rel="stylesheet" href="style.css">
+  <script type="module" src="admin.js"></script>
 </head>
 
 <body>
 
-<div class="header">
-GUZO GO Admin Dashboard
-</div>
+<header>
+  <h1>GUZO GO Admin Dashboard</h1>
+</header>
 
-<div class="container">
+<section class="search-box">
+  <h3>Add / Update Visa Record</h3>
 
-<div class="card">
+  <input id="fullName" placeholder="Full Name"><br><br>
+  <input id="passportNumber" placeholder="Passport Number"><br><br>
+  <input id="applicationId" placeholder="Application ID"><br><br>
+  <input id="country" placeholder="Country"><br><br>
+  <input id="visaType" placeholder="Visa Type"><br><br>
+  <input id="status" placeholder="Status (Approved/Pending/Rejected)"><br><br>
+  <input id="issueDate" placeholder="Issue Date"><br><br>
+  <input id="expiryDate" placeholder="Expiry Date"><br><br>
+  <input id="photoURL" placeholder="Photo URL"><br><br>
 
-<h2>Add Applicant</h2>
+  <button id="saveBtn">Save</button>
+</section>
 
-<input id="name" placeholder="Full Name">
+<section class="search-box">
+  <h3>Search Record</h3>
+  <input id="searchKey" placeholder="Passport or Application ID">
+  <button id="searchBtn">Search</button>
+</section>
 
-<input id="passport" placeholder="Passport Number">
+<section id="adminResult" class="card hidden"></section>
 
-<input id="dob" placeholder="Date of Birth (Example: 01 Jan 2000)">
-
-<input id="issueDate" value="Auto Generated" readonly>
-
-<input id="expiryDate" value="Auto Generated" readonly>
-
-<select id="country">
-<option>Canada 🇨🇦</option>
-<option>Saudi Arabia 🇸🇦</option>
-<option>Kuwait 🇰🇼</option>
-<option>United Arab Emirates 🇦🇪</option>
-</select>
-
-<select id="type">
-<option>Work Visa</option>
-<option>Visit Visa</option>
-<option>Student Visa</option>
-<option>Temporary Resident Permit</option>
-</select>
-
-<select id="status">
-<option>Approved</option>
-<option>Processing</option>
-<option>Rejected</option>
-</select>
-
-<input id="photo" placeholder="Photo URL">
-
-<button onclick="generateApplicant()">
-Generate Applicant
-</button>
-
-<hr>
-
-<h2>Dashboard Statistics</h2>
-
-<div id="stats"></div>
-
-<hr>
-
-<h2>Search Applicant</h2>
-
-<input
-id="searchInput"
-placeholder="Search Applicant ID">
-
-<button onclick="searchApplicant()">
-Search Applicant
-</button>
-
-<div id="searchResult"></div>
-
-<div id="photoPreview"></div>
-
-<div id="applicantList"></div>
-
-</div>
-
-</div>
-
-<script type="module" src="app.js"></script>
-
-</body>
-  </html>
+</bod>
+</html>
