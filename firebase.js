@@ -1,15 +1,26 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-app.js";
-import { getFirestore } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-firestore.js";
+// Firebase v10+ (Modular SDK)
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
+import {
+  getFirestore,
+  collection,
+  getDocs,
+  query,
+  where
+} from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
 
+// 🔥 GUZO GO Firebase Config (replace with yours)
 const firebaseConfig = {
-  apiKey: "AIzaSyBnvHJZsdRGoFbCQPyFMmxUpTvbTxXmKts",
-  authDomain: "guzo-go-visa-verificatio-bc467.firebaseapp.com",
-  projectId: "guzo-go-visa-verificatio-bc467",
-  storageBucket: "guzo-go-visa-verificatio-bc467.firebasestorage.app",
-  messagingSenderId: "499782903724",
-  appId: "1:499782903724:web:9fca41ea06d580fee7fc09"
+  apiKey: "YOUR_API_KEY",
+  authDomain: "YOUR_PROJECT.firebaseapp.com",
+  projectId: "YOUR_PROJECT_ID",
+  storageBucket: "YOUR_PROJECT.appspot.com",
+  messagingSenderId: "YOUR_SENDER_ID",
+  appId: "YOUR_APP_ID"
 };
 
+// Init Firebase
 const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 
-export const db = getFirestore(app);
+// Export Firestore tools
+export { db, collection, getDocs, query, where };
