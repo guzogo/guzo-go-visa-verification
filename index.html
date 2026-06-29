@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>GUZO GO Visa Verification</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
@@ -17,7 +19,7 @@ font-family:Arial,sans-serif;
 }
 
 body{
-background:#eef2f7;
+background:#eef3f8;
 padding:20px;
 }
 
@@ -26,182 +28,156 @@ background:#003366;
 color:white;
 padding:20px;
 text-align:center;
-font-size:24px;
+font-size:28px;
 font-weight:bold;
-border-radius:12px;
-margin-bottom:20px;
+border-radius:15px;
+margin-bottom:25px;
+box-shadow:0 8px 20px rgba(0,0,0,.15);
 }
 
-.card{
-max-width:600px;
+.search-box{
+max-width:700px;
 margin:auto;
 background:white;
-padding:20px;
-border-radius:15px;
-box-shadow:0 5px 15px rgba(0,0,0,.15);
+padding:25px;
+border-radius:20px;
+box-shadow:0 8px 25px rgba(0,0,0,.15);
+}
+
+.search-box h2{
+text-align:center;
+color:#003366;
+margin-bottom:20px;
 }
 
 input{
 width:100%;
-padding:12px;
-margin-top:10px;
-border:1px solid #ccc;
-border-radius:8px;
+padding:14px;
 font-size:16px;
+border:1px solid #ccc;
+border-radius:10px;
+margin-bottom:15px;
 }
 
 button{
 width:100%;
-padding:12px;
-margin-top:12px;
+padding:14px;
+font-size:17px;
+font-weight:bold;
 background:#003366;
 color:white;
 border:none;
-border-radius:8px;
-font-size:16px;
-font-weight:bold;
+border-radius:10px;
 cursor:pointer;
 }
 
 button:hover{
-background:#004d99;
+background:#0050a0;
 }
 
-.result-card{
-margin-top:20px;
-border:1px solid #ddd;
-border-radius:12px;
-overflow:hidden;
+#result{
+margin-top:30px;
 }
 
-.result-header{
-background:#003366;
-color:white;
-text-align:center;
-padding:20px;
-}
-
-.result-photo{
-width:130px;
-height:130px;
-border-radius:50%;
-object-fit:cover;
-border:4px solid white;
-margin-top:10px;
-}
-
-.result-body{
-padding:20px;
-}
-
-.row{
-padding:8px 0;
-border-bottom:1px solid #eee;
-}
-
-#qrcode{
-display:flex;
-justify-content:center;
-padding:20px;
-}
 .visa-card{
-max-width:700px;
-margin:20px auto;
-background:#fff;
+background:white;
 border-radius:20px;
 overflow:hidden;
 box-shadow:0 10px 30px rgba(0,0,0,.15);
 }
 
 .card-header{
-background:#0b376b;
-color:#fff;
+background:#003366;
+color:white;
+padding:20px;
 display:flex;
 justify-content:space-between;
 align-items:center;
-padding:20px;
 }
 
 .logo{
-font-size:28px;
+font-size:30px;
 font-weight:bold;
 }
 
-.verified{
+.verify{
+color:#FFD700;
 font-size:18px;
 font-weight:bold;
-color:#ffd54f;
 }
-
-.card-top{
+.card-body{
 display:flex;
-gap:20px;
 padding:25px;
-align-items:center;
+gap:25px;
+align-items:flex-start;
 }
 
-.photo-box{
-width:180px;
+.left{
+width:220px;
+text-align:center;
 }
 
 .photo{
-width:170px;
-height:210px;
+width:180px;
+height:220px;
 object-fit:cover;
 border-radius:12px;
-border:4px solid #0b376b;
+border:4px solid #003366;
+background:#eee;
 }
 
-.info-top{
+.right{
 flex:1;
 }
 
-.info-top h1{
-margin:0;
-font-size:34px;
-color:#0b376b;
+.name{
+font-size:32px;
+font-weight:bold;
+color:#003366;
+margin-bottom:15px;
 }
 
 .visa-id{
 display:inline-block;
-margin-top:15px;
-padding:10px 25px;
-background:#0b376b;
+background:#003366;
 color:white;
-font-size:22px;
+padding:10px 20px;
+border-radius:8px;
+font-size:20px;
 font-weight:bold;
-border-radius:10px;
+margin-bottom:20px;
 }
 
-.mini-info{
-display:flex;
-gap:50px;
-margin-top:25px;
-}
-
-.details{
-padding:25px;
-}
-
-.details div{
+.info-row{
 display:flex;
 justify-content:space-between;
 padding:12px 0;
 border-bottom:1px solid #ddd;
-font-size:18px;
+font-size:17px;
 }
 
 .status{
-font-weight:bold;
 color:green;
+font-weight:bold;
 }
 
 #qrcode{
 display:flex;
 justify-content:center;
-padding:30px;
-  }
+margin-top:20px;
+}
+
+.footer{
+background:#003366;
+color:white;
+text-align:center;
+padding:12px;
+font-size:14px;
+font-weight:bold;
+}
+
 </style>
+
 </head>
 
 <body>
@@ -210,9 +186,9 @@ padding:30px;
 GUZO GO Visa Verification
 </div>
 
-<div class="card">
+<div class="search-box">
 
-<h2>Visa Verification</h2>
+<h2>Visa Verification System</h2>
 
 <input
 type="text"
@@ -220,26 +196,30 @@ id="visaId"
 placeholder="Enter Visa ID">
 
 <button onclick="verifyVisa()">
-Verify Visa
+VERIFY VISA
 </button>
 
-<div id="result"></div>
-<div id="qrcode"></div>
-
 </div>
+
+<div id="result"></div>
 
 <script type="module">
 
 import { db } from "./firebase.js";
+
 import {
 collection,
 getDocs
 } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-firestore.js";
-
-async function verifyVisa(){
+ async function verifyVisa(){
 
 const visaId =
 document.getElementById("visaId").value.trim();
+
+if(visaId===""){
+alert("Enter Visa ID");
+return;
+}
 
 const snapshot =
 await getDocs(collection(db,"applicants"));
@@ -258,16 +238,26 @@ applicant = data;
 
 if(!applicant){
 
-document.getElementById("result").innerHTML =
-"<h3 style='color:red;text-align:center'>❌ Visa ID Not Found</h3>";
-
-document.getElementById("qrcode").innerHTML="";
+document.getElementById("result").innerHTML = `
+<div style="
+background:white;
+padding:30px;
+border-radius:15px;
+text-align:center;
+color:red;
+font-size:22px;
+font-weight:bold;
+box-shadow:0 5px 15px rgba(0,0,0,.15);
+">
+❌ Visa ID Not Found
+</div>
+`;
 
 return;
 
 }
-  document.getElementById("result").innerHTML = `
 
+document.getElementById("result").innerHTML = `
 <div class="visa-card">
 
 <div class="card-header">
@@ -303,7 +293,6 @@ ${applicant.name}
 <div class="visa-id">
 ${applicant.id}
 </div>
-
 <div class="info-row">
 <b>Passport</b>
 <span>${applicant.passport}</span>
@@ -326,7 +315,7 @@ ${applicant.id}
 
 <div class="info-row">
 <b>Status</b>
-<span class="status-approved">
+<span class="status">
 ${applicant.status}
 </span>
 </div>
@@ -346,86 +335,12 @@ ${applicant.status}
 </div>
 
 <div class="footer">
-GUZO GO • Official Visa Verification System
+GUZO GO • OFFICIAL VISA VERIFICATION SYSTEM
 </div>
 
 </div>
 
 `;
-  document.getElementById("qrcode").innerHTML = "";
-
-new QRCode(document.getElementById("qrcode"),{
-    text: applicant.id,
-    width:150,
-    height:150
-});
-
-}
-
-window.verifyVisa = verifyVisa;
-document.getElementById("result").innerHTML = `
-
-<div class="visa-card">
-
-<div class="card-header">
-
-<div class="logo">
-GUZO GO
-</div>
-
-<div class="verified">
-✔ VERIFIED VISA
-</div>
-
-</div>
-
-<div class="card-top">
-
-<div class="photo-box">
-
-<img src="${user.photo}" class="photo">
-
-</div>
-
-<div class="info-top">
-
-<h1>${user.name}</h1>
-
-<div class="visa-id">
-${user.id}
-</div>
-
-<div class="mini-info">
-
-<p><b>Country</b><br>${user.country}</p>
-
-<p><b>Visa Type</b><br>${user.type}</p>
-
-</div>
-
-</div>
-
-</div>
-
-<div class="details">
-
-<div><b>Passport</b><span>${user.passport}</span></div>
-
-<div><b>Date of Birth</b><span>${user.dob}</span></div>
-
-<div><b>Status</b><span class="status">${user.status}</span></div>
-
-<div><b>Issue Date</b><span>${user.issueDate}</span></div>
-
-<div><b>Expiry Date</b><span>${user.expiryDate}</span></div>
-
-</div>
-
-<div id="qrcode"></div>
-
-</div>
-
-`;  
 
 document.getElementById("qrcode").innerHTML = "";
 
@@ -434,12 +349,11 @@ text: applicant.id,
 width:160,
 height:160
 });
-
-}
+  }
 
 window.verifyVisa = verifyVisa;
 
 </script>
 
 </body>
-</html>
+</html> 
