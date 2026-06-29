@@ -1,4 +1,4 @@
-# GUZO GO Visa Verification System
+# GUZO GO INTERNATIONAL Visa Verification System
 
 ## Features
 - Visa verification by Passport / Application ID
